@@ -24,10 +24,10 @@ curl::curl_download("https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONS
                     destfile = temp)
 
 deflator <- read_excel(temp, skip = 3, sheet = "IPRIX2020") %>%
-  rename(function = ...1, variable = ...2) %>%
-  gather(year, OBS_VALUE, -function, -variable) %>%
+  rename(fonction = ...1, variable = ...2) %>%
+  gather(year, OBS_VALUE, -fonction, -variable) %>%
   filter(!is.na(OBS_VALUE),
-         function %in% c("CP08")) %>%
+         fonction %in% c("CP08")) %>%
   transmute(date = as.Date(paste0(year, "-01-01")),
             OBS_VALUE,
             variable = "Household Consumption Deflator")
